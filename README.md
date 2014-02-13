@@ -20,9 +20,9 @@ You have to run :
 $ npm install
 ```
 #### 3. Parse.com
-We are using [Parse.com](http://http://parse.com) to store our data. You will need to create an account, an application an set some environment variables.
+We are using [Parse.com](http://parse.com) to store our data. You will need to create an account, an application an set some environment variables.
 
-After having created a new application on [Parse.com](http://http://parse.com), grab your ```Application ID``` and your ```Javascript ID``` and add them to your environment :
+After having created a new application on [Parse.com](http://parse.com), grab your ```Application ID``` and your ```Javascript ID``` and add them to your environment :
 
 ##### For exemple on Unix systems :
 ```
