@@ -1,7 +1,9 @@
 var Parse = require('parse').Parse;
 
-var PARSE_APP_KEY = process.env.PARSE_WHOOZIN_APP_KEY;
-var PARSE_SDK_KEY = process.env.PARSE_WHOOZIN_SDK_KEY;
+// Due to travis-ci, we have to expose our Parse.com keys...
+// To handle this issue, we are using specific Parse App where data can be destroyed at any time.
+var PARSE_APP_KEY = "IHBFqXfE5WIKIdRA6TUlikTQ5XRRsu7DfP3cacif";
+var PARSE_SDK_KEY = "HpGn9ocefXikSOX7LkBMyuDTrf3qeGgYjvy8Ddrd";
 
 Parse.initialize(PARSE_APP_KEY, PARSE_SDK_KEY);
 
