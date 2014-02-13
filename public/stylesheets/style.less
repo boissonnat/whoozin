@@ -1,8 +1,22 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+// Bootstrap imports
+@import "bootstrap-v3.1.0/less/bootstrap";
+
+// Import font from google fonts
+@import url(http://fonts.googleapis.com/css?family=Cookie);
+
+// Whozin specifics imports
+@import "sticky-footer";
+@import "utils";
+
+// Global styles
+#wrap > .container {
+  padding: 60px 15px 0;
 }
 
-a {
-  color: #00B7FF;
+.navbar-brand {
+  color: @brand-danger !important;
+  font-family: 'Cookie',cursive;
+  font-size: 42px;
+  line-height: inherit;
+  padding: 0 0px;
 }
