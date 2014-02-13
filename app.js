@@ -37,12 +37,22 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+// Add middleware to check user authorization
+function checkAuth(req, res, next) {
+    if (!req.session.user_id) {
+        res.send('You are not authorized to view this page');
+    } else {
+        next();
+    }
+}
+
 // Define routes
 app.get('/', routes.index(Parse));
 app.get('/users/sign_up', user.signUp);
 app.post('/users/do_sign_up', user.doSignUp(Parse));
 app.get('/users/sign_in', user.signIn);
 app.post('/users/do_sign_in', user.doSignIn(Parse));
+app.get('/users/logout', user.doLogOut(Parse));
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

@@ -1,8 +1,4 @@
 
-/*
- * GET users listing.
- */
-
 exports.signUp = function(req, res) {
     res.render('guest/signUp', { title: 'Sign up' });
 };
@@ -21,7 +17,6 @@ exports.doSignUp = function(Parse) {
                     res.redirect("/")
                 },
                 error: function(user, error) {
-                    //self.$(".error").html(error.message).show();
                     res.render('guest/signUp', {title: 'Sign Up', error: error.message})
                 }
             });
@@ -39,7 +34,7 @@ exports.signIn = function(req, res) {
 exports.doSignIn = function(Parse) {
     return function(req, res) {
         var post = req.body;
-        Parse.User.logIn(post.email, post.password, {
+        Parse.User.logIn(post.username, post.password, {
             success: function(user) {
                 res.redirect("/")
             },
@@ -49,5 +44,12 @@ exports.doSignIn = function(Parse) {
         });
     }
 };
+
+exports.doLogOut = function(Parse) {
+    return function(req, res) {
+        Parse.User.logOut();
+        res.redirect("/")
+    }
+}
 
 
