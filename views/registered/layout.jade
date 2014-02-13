@@ -31,9 +31,8 @@ html(lang="en")
                         a(href="/").navbar-brand Whoozin
 
                     div.collapse.navbar-collapse
-                        ul.nav.navbar-nav.navbar-right
-                            li
-                                a(href="/users/logout") Logout
+                        p.navbar-text.navbar-right= "Logged as " + user.get("username") + " - "
+                            a(href="/users/logout") Logout
 
             // Begin page content
             div.container
