@@ -2,17 +2,29 @@ extends layout
 
 block content
 
-  div.page-header
-    h3="Hey " + user.get("username")
+  if activities != ""
+    // There are some activities found
+    h2 Your activities
+    each val in activities
+      div.panel.panel-default
+        div.panel-heading
+          h5
+            - var href = "/activities/" + val.id
+            a(href=href)=val.get("title")
+            small= " - created by " + val.get("author")
+        div.panel-body
+          p= val.get("description")
 
-    div.alert.alert-warning
-      h5
-        | How cool is this app ?
-      p
-        | Right, right... For now it a little useless. But wait for the Tchoog's contribution ;-).
+  else
+    // No activity found !
+    div.big-spacer
 
-      hr
 
-      p
-        | IT'S GONNA BE LEGEN - wait for it - DARY! :D :D
+    div.alert.alert-danger.text-center
+      h3 Let's create your first activity
+      p Create an activity, share it with your friends and let the magic do the rest !
+      div.min-spacer
+      a(href="/activities/create").btn.btn-danger.btn-large Create an activity
+      div.min-spacer
+      p IT'S GONNA BE LEGEN - wait for it - DARY! :D :D
 

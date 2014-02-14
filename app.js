@@ -3,11 +3,14 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
+var Parse = require('parse').Parse;
+
 var http = require('http');
 var path = require('path');
-var Parse = require('parse').Parse;
+
+var routes = require('./routes');
+var users = require('./routes/users');
+var activities = require('./routes/activities');
 
 var app = express();
 
@@ -36,22 +39,25 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// Add middleware to check user authorization
-function checkAuth(req, res, next) {
-  if (!req.session.user_id) {
-    res.send('You are not authorized to view this page');
-  } else {
-    next();
-  }
-}
-
+//
 // Define routes
+////////////////////////////////////////
+
+// Root
 app.get('/', routes.index(Parse));
-app.get('/users/sign_up', user.signUp);
-app.post('/users/do_sign_up', user.doSignUp(Parse));
-app.get('/users/sign_in', user.signIn);
-app.post('/users/do_sign_in', user.doSignIn(Parse));
-app.get('/users/logout', user.doLogOut(Parse));
+
+// Users
+app.get('/users/sign_up', users.signUp);
+app.post('/users/do_sign_up', users.doSignUp(Parse));
+app.get('/users/sign_in', users.signIn);
+app.post('/users/do_sign_in', users.doSignIn(Parse));
+app.get('/users/logout', users.doLogOut(Parse));
+
+// Activities
+app.get('/activities/create', activities.create(Parse));
+app.post('/activities/save', activities.save(Parse));
+app.get('/activities/:id', activities.show(Parse));
+
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
