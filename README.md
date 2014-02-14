@@ -31,8 +31,14 @@ export PARSE_WHOOZIN_SDK_KEY=<YOUR JS ID>
 ```
 
 #### 4. Run
-Now you are able tio run Whoozin with the following command line :
+Now you are able to run Whoozin with the following command line :
 
 ```
 $ node app.js
 ```
+
+Testing
+-------
+
+We are using [Mocha.js](https://github.com/visionmedia/mocha) and [Should.js](https://github.com/visionmedia/should.js) to perform our unit tests.
+As you may notice, this GitHub repository is linked to [travis-ci.org](https://travis-ci.org/boissonnat/whoozin) for the continuous integration.
