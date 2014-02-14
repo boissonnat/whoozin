@@ -2,48 +2,48 @@ extends layout
 
 block content
 
-    div.big-spacer
+  div.big-spacer
 
-    h1.text-center
-        | Whoozin : the mess killer.
+  h1.text-center
+    |  Whoozin : the mess killer.
 
+  p.text-center.lead
+    | 10 mails to schedule a tennis ? How many for a soccer ? Seriously ? <br/>
+    | Lucky for you, we have put our hands in the dirt...
+
+  div.big-spacer
+
+  div.row
+    div.col-md-4
+      div.panel.panel-default
+        div.panel-body
+          h4.text-center
+            span.glyphicon.glyphicon-calendar
+            | Plan an activity
+
+    div.col-md-4
+      div.panel.panel-default
+        div.panel-body
+          h4.text-center
+            span.glyphicon.glyphicon-send
+            | Send invitation to your friends
+
+    div.col-md-4
+      div.panel.panel-default
+        div.panel-body
+          h4.text-center
+            span.glyphicon.glyphicon-music
+            | Let's have some fun again
+
+
+  div.big-spacer
+
+  div.row
     p.text-center.lead
-        | 10 mails to schedule a tennis ? How many for a soccer ? Seriously ? <br/>
-        | Lucky for you, we have put our hands in the dirt...
+      | Would you like to give a try to Whoozin ?
 
-    div.big-spacer
-
-    div.row
-        div.col-md-4
-            div.panel.panel-default
-                div.panel-body
-                    h4.text-center
-                        span.glyphicon.glyphicon-calendar
-                        |  Plan an activity
-
-        div.col-md-4
-            div.panel.panel-default
-                div.panel-body
-                    h4.text-center
-                        span.glyphicon.glyphicon-send
-                        |  Send invitation to your friends
-
-        div.col-md-4
-            div.panel.panel-default
-                div.panel-body
-                    h4.text-center
-                        span.glyphicon.glyphicon-music
-                        |  Let's have some fun again
-
-
-    div.big-spacer
-
-    div.row
-        p.text-center.lead
-            | Would you like to give a try to Whoozin ?
-
-        ul.text-center.list-inline
-            li
-                a(href="/users/sign_up").btn.btn-success.btn-lg Sign up
-            li
-                a(href="/users/sign_in").btn.btn-primary.btn-lg Login
+    ul.text-center.list-inline
+      li
+        a(href="/users/sign_up").btn.btn-success.btn-lg Sign up
+      li
+        a(href="/users/sign_in").btn.btn-primary.btn-lg Login
