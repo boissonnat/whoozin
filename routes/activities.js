@@ -31,6 +31,51 @@ exports.save = function (Parse) {
   }
 };
 
+exports.edit = function (Parse) {
+  return function (req, res) {
+    var activityId = req.params.id;
+    // Get activity from Parse
+    var Activity = Parse.Object.extend("Activity");
+    var query = new Parse.Query(Activity);
+    query.get(activityId).then(function(activity) {
+      // Activity found
+      res.render('registered/activities/edit', { title: 'Edit a new activity' + activity.get("title"),activity: activity, user: Parse.User.current() });
+    },function(object, error) {
+      // Activity not found
+      console.log("Unable to find this activity");
+      res.redirect("/")
+    });
+  }
+};
+
+
+exports.update = function (Parse) {
+  return function (req, res) {
+    var post = req.body;
+
+    // Create a Parse object
+    var activityId = post.id;
+    // Get activity from Parse
+    var Activity = Parse.Object.extend("Activity");
+    var query = new Parse.Query(Activity);
+    query.get(activityId).then(function(activity) {
+      // Activity found, set its properties
+      activity.set("title", post.title);
+      activity.set("description", post.description);
+      activity.set("minParticipant", post.minParticipant);
+      activity.set("maxParticipant", post.maxParticipant);
+      activity.save();
+      res.redirect("/")
+
+    },function(object, error) {
+      // Activity not found
+      console.log("Unable to find this activity");
+      res.redirect("/")
+    });
+  }
+};
+
+
 
 exports.show = function (Parse) {
   return function (req, res) {

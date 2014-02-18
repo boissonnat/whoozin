@@ -114,6 +114,8 @@ app.get('/logout', users.doLogOut(Parse));
 app.get('/activities/create', requireUser, activities.create(Parse));
 app.post('/activities/save', requireUser, activities.save(Parse));
 app.get('/activities/:id', activities.show(Parse));
+app.get('/activities/:id/edit', requireUser, activities.edit(Parse));
+app.post('/activities/update', requireUser, activities.update(Parse));
 
 
 // Launch the server

@@ -11,7 +11,6 @@ exports.index = function (Parse) {
       var query = new Parse.Query(Activity);
       query.equalTo("author", Parse.User.current().get("username"));
       query.find().then(function(results) {
-        console.log("Results = " + results)
         res.render('registered/index', { title: 'Whoozin', user: Parse.User.current(), activities: results});
       }, function(error) {
         console.log("Error: " + error.code + " " + error.message);
