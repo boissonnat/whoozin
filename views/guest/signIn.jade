@@ -11,7 +11,7 @@ block content
         div.alert.alert-danger
           p=error
 
-      form(role="form",action="/users/do_sign_in", method="POST")
+      form(role="form",action="/do_sign_in", method="POST")
         div.form-group
           label(for="username") Username
           input(type="username", id="username", placeholder="Username", name="username").form-control

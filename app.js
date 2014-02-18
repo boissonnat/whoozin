@@ -39,23 +39,38 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-//
-// Define routes
+// Secure URL through middleware
 ////////////////////////////////////////
+
+// Ensure user is logged in
+function requireUser(req, res, next) {
+  if (Parse.User.current()) {
+    // Ok user is logged in, allow the next route to run
+    console.log("requireUser() called, user present, go next()");
+    next();
+  } else {
+    // No user found -> 403
+    console.log("requireUser() called, no user present -> 403");
+    res.send(403);
+  }
+}
+
+// Define routes
+///////////////////////////////////////
 
 // Root
 app.get('/', routes.index(Parse));
 
-// Users
-app.get('/users/sign_up', users.signUp);
-app.post('/users/do_sign_up', users.doSignUp(Parse));
-app.get('/users/sign_in', users.signIn);
-app.post('/users/do_sign_in', users.doSignIn(Parse));
-app.get('/users/logout', users.doLogOut(Parse));
+// login / logout
+app.get('/sign_up', users.signUp);
+app.post('/do_sign_up', users.doSignUp(Parse));
+app.get('/sign_in', users.signIn);
+app.post('/do_sign_in', users.doSignIn(Parse));
+app.get('/logout', users.doLogOut(Parse));
 
 // Activities
-app.get('/activities/create', activities.create(Parse));
-app.post('/activities/save', activities.save(Parse));
+app.get('/activities/create', requireUser, activities.create(Parse));
+app.post('/activities/save', requireUser, activities.save(Parse));
 app.get('/activities/:id', activities.show(Parse));
 
 
