@@ -5,9 +5,16 @@ block content
   div.page-header
     h2= activity.get("title")
       if user && activity.get("author") === user.get("username")
-        - var href = "/activities/" + activity.id + "/edit"
-        a(href=href).btn.btn-primary.pull-right
-          span.glyphicon.glyphicon-edit
-          |  Edit
+        ul.list-inline.pull-right
+          li
+            - var hrefEdit = "/activities/" + activity.id + "/edit"
+            a(href=href).btn.btn-primary
+              span.glyphicon.glyphicon-edit
+              |  Edit
+          li
+            - var hrefDelete = "/activities/" + activity.id + "/delete"
+            a(href=hrefDelete).btn.btn-danger
+              span.glyphicon.glyphicon-trash
+              |  Delete
   p= activity.get("description")
 

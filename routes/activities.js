@@ -75,6 +75,24 @@ exports.update = function (Parse) {
   }
 };
 
+exports.destroy = function (Parse) {
+  return function (req, res) {
+    var activityId = req.params.id;
+    // Get activity from Parse
+    var Activity = Parse.Object.extend("Activity");
+    var query = new Parse.Query(Activity);
+    query.get(activityId).then(function(activity) {
+      // Activity found -> delete it
+      activity.destroy();
+      res.redirect("/")
+    },function(object, error) {
+      // Activity not found
+      console.log("Unable to find this activity");
+      res.redirect("/")
+    });
+  }
+};
+
 
 
 exports.show = function (Parse) {

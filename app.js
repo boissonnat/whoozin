@@ -55,6 +55,7 @@ function requireUser(req, res, next) {
   }
 }
 
+
 // Error handlers
 app.use(function(req, res, next){
   res.status(404);
@@ -116,6 +117,7 @@ app.post('/activities/save', requireUser, activities.save(Parse));
 app.get('/activities/:id', activities.show(Parse));
 app.get('/activities/:id/edit', requireUser, activities.edit(Parse));
 app.post('/activities/update', requireUser, activities.update(Parse));
+app.get('/activities/:id/delete', requireUser, activities.destroy(Parse));
 
 
 // Launch the server
