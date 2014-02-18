@@ -42,7 +42,7 @@ if ('development' == app.get('env')) {
 // MIDDLEWARE
 ////////////////////////////////////////
 
-// Secure URL through middleware
+// Secure URL
 function requireUser(req, res, next) {
   if (Parse.User.current()) {
     // Ok user is logged in, allow the next route to run
