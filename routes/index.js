@@ -12,10 +12,10 @@ exports.index = function (Parse) {
       query.equalTo("author", Parse.User.current().get("username"));
       query.find().then(function(results) {
         console.log("Results = " + results)
-        res.render('registered/index', { title: 'Whoozin ACTIVITIES', user: Parse.User.current(), activities: results});
+        res.render('registered/index', { title: 'Whoozin', user: Parse.User.current(), activities: results});
       }, function(error) {
         console.log("Error: " + error.code + " " + error.message);
-        res.render('registered/index', { title: 'Whoozin ERROR', user: Parse.User.current(), activities: null});
+        res.render('registered/index', { title: 'Whoozin', user: Parse.User.current(), activities: null});
       });
 
     } else {

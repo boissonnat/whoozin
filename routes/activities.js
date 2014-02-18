@@ -25,7 +25,7 @@ exports.save = function (Parse) {
 
       },
       error: function(activity, error) {
-        res.render('registered/activities/create', {title: 'Create new activity', error: error.message})
+        res.render('registered/activities/create', {title: 'Create new activity', error: error.message, user: Parse.User.current()})
       }
     });
   }
@@ -40,7 +40,7 @@ exports.show = function (Parse) {
     var query = new Parse.Query(Activity);
     query.get(activityId).then(function(activity) {
       // Activity found
-      res.render('registered/activities/show', {title: activity.get("title"), activity: activity})
+      res.render('registered/activities/show', {title: activity.get("title"), activity: activity, user: Parse.User.current()})
     },function(object, error) {
       // Activity not found
       console.log("Unable to find this activity");
