@@ -55,6 +55,27 @@ function requireUser(req, res, next) {
   }
 }
 
+// Ensure the current user is the author of the requested activity
+function isAuthor(req, res, next) {
+  var activityId = req.params.id;
+  // Get activity from Parse
+  var Activity = Parse.Object.extend("Activity");
+  var query = new Parse.Query(Activity);
+  query.get(activityId).then(function(activity) {
+    // Activity found, compare current user and author
+    if (Parse.User.current().get("username") === activity.get("author")){
+      next();
+    }else{
+      res.render("errors/403")
+    }
+
+  },function(object, error) {
+    // Activity not found
+    console.log("Unable to find this activity");
+    res.redirect("/")
+  });
+}
+
 
 // Error handlers
 app.use(function(req, res, next){
@@ -115,9 +136,9 @@ app.get('/logout', users.doLogOut(Parse));
 app.get('/activities/create', requireUser, activities.create(Parse));
 app.post('/activities/save', requireUser, activities.save(Parse));
 app.get('/activities/:id', activities.show(Parse));
-app.get('/activities/:id/edit', requireUser, activities.edit(Parse));
+app.get('/activities/:id/edit', requireUser, isAuthor, activities.edit(Parse));
 app.post('/activities/update', requireUser, activities.update(Parse));
-app.get('/activities/:id/delete', requireUser, activities.destroy(Parse));
+app.get('/activities/:id/delete', requireUser, isAuthor, activities.destroy(Parse));
 
 
 // Launch the server
